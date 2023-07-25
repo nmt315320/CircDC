@@ -1,13 +1,14 @@
 # CircDC
 1. Description
-CircRNA is the precondition for its industrial application and functional interpretation. However, the formation of inclusion bodies is still an inevitable roadblock in protein science and industry, where only nearly a quarter of proteins can be successfully expressed in soluble form.
+ Circular RNAs (circRNAs) can regulate microRNA activity and are related to various diseases, such as cancer. Functional research on circRNAs is the focus of scientific research. Accurate identification of circRNAs is important for gaining insight into their functions.
 
-CircDC is developed to predicts circRNA using a long-short-term memory (BLSTM) network with hybrid features composed of physicochemical patterns and distributed representation of amino acids. Comparison results showed that the proposed model achieved more accurate and balanced performance than existing tools.
 
-2. Availability
+We developed a novel framework, CircDC, for classifying circRNAs from other lncRNAs. CircDC uses four different feature encoding schemes and adopts a multilayer convolutional neural network and bidirectional long short-term memory network to learn high-order feature representation and make circRNA predictions. 
+
+3. Availability
 
 2.1 Datasets and source code are available at:
- https://github.com/wangchao-malab/DeepSoluE/.
+https://github.com/nmt315320/CircDC.git.
 
 2.1 Local running
 2.1.1 Environment
