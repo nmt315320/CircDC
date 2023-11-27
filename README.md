@@ -5,12 +5,15 @@
 
 We developed a novel framework, CircDC, for classifying circRNAs from other lncRNAs. CircDC uses four different feature encoding schemes and adopts a multilayer convolutional neural network and bidirectional long short-term memory network to learn high-order feature representation and make circRNA predictions. 
 
-3. Availability
+2. Availability
 
 2.1 Datasets and source code are available at:
 https://github.com/nmt315320/CircDC.git.
+Data：circRNA data, .bed format,circRNA data, bed format
+      hg38.fa---Because the data is relatively large, you need to download it yourself.
 
 2.1 Local running
+
 2.1.1 Environment
 Before running, please make sure the following packages are installed in Python environment:
 
