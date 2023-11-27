@@ -83,7 +83,7 @@ The optional parameters are:
                         help='BED input file for other long non coding RNAs for training, it should be like:chromosome    start    end    gene')
     parser.add_argument('--testing_bed', type=str, default='data/test.bed',
                         help='BED input file for testing data, it should be like:chromosome    start    end    gene')
-
+CircDC.py  
 
 3. Output explaining
 The output file (in ".csv" format) can be found in results folder, which including sequence number, sequence_id, predicted probability and pedicted result.
