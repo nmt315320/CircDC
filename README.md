@@ -39,7 +39,12 @@ One additional file, namely hg.38.fa, is needed for CircDC, we did not provide t
 
 hg38: wget https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/latest/hg38.fa.gz
 
-2.1.3 Running
+3. Running
+
+3.1 Feature  Extraction
+ RCM: "extract_rcm_features” is included as a function in the circDC.py file.
+ Graph feature: 
+ Sequence feature:
 
 Changing working dir to CircDC-master, and then running the following command:
 
