@@ -43,12 +43,16 @@ hg38: wget https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/latest/hg38.f
 
 3.1 Feature  Extraction
  RCM: "extract_rcm_features” is included as a function in the circDC.py file.
- Graph feature: 
- Sequence feature:
-
+ Graph feature: GraphProt-1.0.1  ---See Graphprot-1.0.1/redame.html for details. 
+ Sequence feature: Pse-in-one-2.0 ---/Pse-in-One-2.0/docs/Pse-in-One 2.0_manual.pdf.
+ 
+3.2 Feature  selection
+MRMD2.0:
+    usage：python  mrmd2.0.py  -i test.arff -s 1 -e  -1  -l 5  -o metrics.csv  -c Dimensionalized_dataset.csv(See MRMD 2.0/redame for details.)
+3.3 CircDC     
 Changing working dir to CircDC-master, and then running the following command:
 
-python CircDC.py -i testing.fasta -o results.csv 
+    usage:python CircDC.py -i testing.fasta -o results.csv 
 
 -i: name of input_file in fasta format # folder “sequence” is the default file path of the input_file
 
