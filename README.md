@@ -47,11 +47,13 @@ hg38: wget https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/latest/hg38.f
 3.2 Feature  selection
 
 MRMD2.0:
+
     usage：python  mrmd2.0.py  -i test.arff -s 1 -e  -1  -l 5  -o metrics.csv  -c Dimensionalized_dataset.csv(See MRMD 2.0/redame for details)
     
 3.3 CircDC     
 
 Changing working dir to CircDC-master, and then running the following command:
+
 usage:python CircDC.py -i testing.fasta -o results.csv 
 -i: name of input_file in fasta format # folder “sequence” is the default file path of the input_file
 -o name of output_file # folder “results” is the default file path for result save.
