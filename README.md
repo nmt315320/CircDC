@@ -8,24 +8,32 @@ We developed a novel framework, CircDC, for classifying circRNAs from other lncR
 
 2. Availability
 
-2.1 Datasets and source code are available at:
+2.1 Datasets and source code are available at:https://github.com/nmt315320/CircDC.git.
 
-https://github.com/nmt315320/CircDC.git.
-Data：circRNA data, .bed format,circRNA data, bed format
-      hg38.fa---Because the data is relatively large, you need to download it yourself.
+sequence Data：circRNA data, .bed format
+
+hg38.fa---Because the data is relatively large, you need to download it yourself.
 
 2.1 Local running
 
 2.1.1 Environment
 
 Before running, please make sure the following packages are installed in Python environment:
+
 gensim==3.4.0
+
 pysam
+
 pigwig
+
 pandas==1.1.3
+
 tensorflow==2.3.0
+
 python==3.7.3
+
 biopython==1.7.8
+
 numpy==1.19.2
 
 For convenience, we strongly recommended users to install the Anaconda Python 3.7.3 (or above) in your local computer.
