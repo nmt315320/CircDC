@@ -108,3 +108,9 @@ The optional parameters are:
 
 The output file (in ".csv" format) can be found in results folder, which including sequence number, sequence_id, predicted probability and pedicted result.
 
+3.5 SHAP
+
+shapexample.py can be executed to analyze important features. The following methods are: shap.TreeExplainer, shap.summary_plot .
+
+
+
