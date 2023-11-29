@@ -49,7 +49,9 @@ hg38: wget https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/latest/hg38.f
 3.1 Feature  Extraction
 
  RCM: "extract_rcm_features” is included as a function in the circDC.py file.
+ 
  Graph feature: GraphProt-1.0.1  ---See Graphprot-1.0.1/redame.html for details. 
+ 
  Sequence feature: Pse-in-one-2.0 ---/Pse-in-One-2.0/docs/Pse-in-One 2.0_manual.pdf.
  
 3.2 Feature  selection
