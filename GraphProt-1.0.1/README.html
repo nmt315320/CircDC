@@ -1,0 +1,144 @@
+<h1 id="graphprotmanual">GraphProt Manual</h1>
+
+<p>This software package contains the GraphProt framework as published in
+&#8220;GraphProt: modeling binding preferences of
+RNA-binding proteins&#8221;.</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>GraphProt contains a precompiled version of &#8220;EDeN&#8221;, the SVM package used for
+feature creation and classification. This binary should run on most Linux-based
+systems. In case it does not run on your system, please call
+&#8220;bash ./recompile_EDeN.sh&#8221; from the GraphProt main directory.</p>
+
+<p>GraphProt uses various opensource software packages. Please make sure that the
+follwing programs are installed and accessible via the PATH environment variable
+(i.e. you should be able to call the programs by just issuing the command).</p>
+
+<ul>
+<li>RNAshapes is used for GraphProt secondary structure predictions (recommended version: 2.1.6, <a href="http://bibiserv.techfak.uni-bielefeld.de/rnashapes/">http://bibiserv.techfak.uni-bielefeld.de/rnashapes/</a>)</li>
+<li>perf is used to calculate prediction performance (<a href="http://osmot.cs.cornell.edu/kddcup/software.html">http://osmot.cs.cornell.edu/kddcup/software.html</a>)</li>
+<li>libsvm is used for support vector regressions (<a href="http://www.csie.ntu.edu.tw/~cjlin/libsvm/">http://www.csie.ntu.edu.tw/~cjlin/libsvm/</a>)</li>
+<li>GNU make is used as the pipeline backend (<a href="http://www.gnu.org/software/make/">http://www.gnu.org/software/make/</a>)</li>
+<li>R is used to process nucleotide-wise margins for motif creation (<a href="www.r-project.org/">www.r-project.org/</a>)</li>
+<li>The R plyr package is required for calculating motifs (<a href="http://plyr.had.co.nz/">http://plyr.had.co.nz/</a>) and can be installed from within R by issuing the command &#8220;install.packages(&#8216;plyr&#8217;)&#8221;.</li>
+<li>GraphProt uses WebLogo3 to plot sequence and structure motifs. GraphProt was tested using version WebLogo 3.2 <a href="http://code.google.com/p/weblogo/downloads">http://code.google.com/p/weblogo/downloads</a>.</li>
+</ul>
+
+<p>GraphProt will scan for these programs and notify you if something seems amiss.
+GraphProt contains a copy of fastapl (<a href="http://seq.cbrc.jp/fastapl/index.html.en">http://seq.cbrc.jp/fastapl/index.html.en</a>).</p>
+
+<h2 id="usage">Usage</h2>
+
+<p>GraphProt analyses are started by calling &#8220;GrapProt.pl&#8221;. If no options are given,
+GraphProt.pl will display a help message summarizing all available options.
+The default mode is to run analyses in classification setting,
+switch to regression setting using the parameter -mode regression.
+In general, GraphProt analyses are run by issuing different actions, e.g.</p>
+
+<p>GraphProt.pl &#8211;action train -fasta train_positives.fa -negfasta train_negatives.fa</p>
+
+<p>GraphProt supports input sequences in fasta format. The <strong>viewpoint</strong> mechanism
+sets viewpoints to all nucleotides in <strong>uppercase</strong> letters, nucleotides in
+<strong>lowercase</strong> letters are only used for RNA structure predictions.</p>
+
+<p>GraphProt parameters abstraction, R, D, bitsize, c, epsilon, epochs and lambda
+are set to default values. For best results, optimized parameters should be
+obtained with the ls parameter optimization setting.</p>
+
+<p>Input files in classification setting are specified with parameters &#8220;-fasta&#8221;
+(binding sites) and &#8220;-negfasta&#8221; (unbound sites). For regressions, input sequences
+are specified with &#8220;-fasta&#8221; and sequence scores with &#8220;-affinities&#8221;. For each
+sequence, the affinity file should contain one value per line.</p>
+
+<p>Output filenames can be specified via a prefix (-prefix); if no prefix is given,
+the default is &#8220;GraphProt&#8221;.</p>
+
+<h3 id="availableactions">Available Actions</h3>
+
+<h4 id="ls-parameteroptimization">ls - Parameter Optimization</h4>
+
+<p>Determines optimized parameters. Parameters are printed to screen and written
+to file &#8220;GraphProt.param&#8221;.</p>
+
+<h4 id="cv-crossvalidation">cv - Crossvalidation</h4>
+
+<p>Runs a 10-fold crossvalidation. Crossvalidation results are written to file
+&#8220;GraphProt.cv_results&#8221;.</p>
+
+<h4 id="train-modeltraining">train - Model Training</h4>
+
+<p>Trains a GraphProt model. The model is written to file &#8220;GraphProt.model&#8221;.</p>
+
+<h4 id="predict-predictbindingforawholesite">predict - Predict binding for a whole site</h4>
+
+<p>Predict binding of whole sequences, e.g. CLIP sites. Margins are written to file
+&#8220;GraphProt.predictions&#8221;. Each line of this file gives the margin for one sequence in the second column,
+in the same order as the fasta file. In classification setting the first column contains the class,
+in regression setting the first column contains, if specified, the affinities, otherwise
+1.</p>
+
+<h4 id="predict_profile-predictbindingprofiles">predict_profile - Predict binding profiles</h4>
+
+<p>Predict binding profiles (nucleotide-wise margins) for sequences. Nucleotide-wise margins are written
+to file &#8220;GraphProt.profile&#8221;, this file contains three columns:</p>
+
+<ol>
+<li>number of sequence</li>
+<li>number of nucleotide</li>
+<li>prediction for this nucleotide</li>
+</ol>
+
+<p>Please note that with GraphProt structure models this action currently only supports sequences of up to 150 nt.</p>
+
+<h4 id="predict_has-predicthigh-affinitybindingsites">predict_has - Predict high-affinity binding sites</h4>
+
+<p>Predict high-affinity target sites as showcased in the GraphProt paper.
+Selects all regions with average scores within 12nt above a given percentile (parameter -percentile, defaults to 99).
+Average nucleotide-wise margins of high-affinity sites are written to file GraphProt.has.
+This file contains three columns:</p>
+
+<ol>
+<li>number of sequence</li>
+<li>number of nucleotide</li>
+<li>average prediction this nucleotide</li>
+</ol>
+
+<h4 id="motif-creaternasequenceandstructuremotifs">motif - Create RNA sequence and structure motifs</h4>
+
+<p>Create RNA sequence and structure motifs as described in the &#8220;GraphProt&#8221; paper.
+Motifs are written to files &#8220;GraphProt.sequence_motif.png&#8221; and &#8220;GraphProt.structure_motif.png&#8221;.</p>
+
+<h2 id="advancedusage">Advanced Usage</h2>
+
+<p>In addition to the integrated usage via GraphProt.pl, individual tasks such as
+creation of RNA structure graphs or calculation of features can be accomplished
+using the following tools:</p>
+
+<ul>
+<li>fasta2shrep_gspan.pl: graph creation</li>
+<li>EDeN/EDeN: NSPD kernel and SGD support vector machine</li>
+</ul>
+
+<p>Usage information for these tools can be obtained by specifying the &#8220;-h&#8221; option.</p>
+
+<h3 id="rnasequenceandstructuregraphs">RNA sequence and structure graphs</h3>
+
+<p>RNA sequence and structure graphs are created using fasta2shrep_gspan.pl. Structure graphs
+are created using the following parameters. The user has to chose an appropriate
+RNAshapes <strong>ABSTRACTION_LEVEL</strong>.</p>
+
+<p>fasta2shrep_gspan.pl &#8211;seq-graph-t &#8211;seq-graph-alph -abstr -stdout -M 3 -wins &#8216;150,&#8217; -shift &#8216;25&#8217; -fasta PTBv1.train.fa -t <strong>ABSTRACTION_LEVEL</strong> | gzip &gt; PTBv1.train.gspan.gz</p>
+
+<p>RNA sequence graphs are created using the following parameters:</p>
+
+<p>fasta2shrep_gspan.pl &#8211;seq-graph-t -nostr -stdout -fasta PTBv1.train.fa | gzip &gt; PTBv1.train.gspan.gz</p>
+
+<h3 id="nspdkernelandsgdsupportvectormachine">NSPD kernel and SGD support vector machine</h3>
+
+<p>For example, 10-fold crossvalidation using EDeN is done via:</p>
+
+<p>EDeN/EDeN -a CROSS_VALIDATION -c 10 -i PTBv1.train.gspan.gz -t PTBv1.train.class -g DIRECTED -b <strong>BIT_SIZE</strong> -r <strong>RADIUS</strong> -d <strong>DISTANCE</strong> -e <strong>EPOCHS</strong> -l <strong>LAMBDA</strong></p>
+
+<p>and setting the appropriate parameters for BIT_SIZE, RADIUS, DISTANCE, EPOCHS
+and LAMBDA.</p>
